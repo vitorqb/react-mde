@@ -8,6 +8,13 @@ export interface AppState {
   tab: "write" | "preview";
 }
 
+const CustomTextArea = React.forwardRef((props: any, ref: any) => {
+  const style = { ...props.style, backgroundColor: "blue" };
+  return (
+    <textarea {...props} style={style} ref={ref} />
+  )
+})
+
 export class App extends React.Component<{}, AppState> {
   converter: Showdown.Converter;
 
@@ -75,9 +82,7 @@ export class App extends React.Component<{}, AppState> {
           classes={{
             suggestionsDropdown: "bbbb"
           }}
-          textAreaComponent={React.forwardRef<HTMLTextAreaElement>((p, ref) => (
-            <textarea ref={ref} {...p} />
-          ))}
+          textAreaComponent={CustomTextArea}
         />
         value:{" "}
         <input
